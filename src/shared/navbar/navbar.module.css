@@ -1,0 +1,76 @@
+.admin_navbar{
+    width: 20%;
+    border-right: 1px solid lightgray;
+    background-color: rgb(29, 28, 28);
+    height: 100%;
+
+}
+
+.admin_navbar_wrapper{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+    padding-top: 30px;
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+.navbar_item{
+    cursor: pointer;
+    position: relative;
+
+}
+
+.navbar_item p{
+    padding: 10px;
+    text-decoration: underline;
+   color: white;
+
+}
+
+.active{
+    background-color: rgb(142, 142, 157);
+}
+
+.submenu {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease-in-out;
+}
+
+.submenu.visible {
+    max-height: 250px; /* Укажите максимальную высоту, которая вмещает все элементы */
+}
+
+.submenu .navbar_item {
+}
+
+
+/*.submenu::before{
+    content: '';
+    position: absolute;
+    height: 10.3%;
+
+    width: 1px;
+    left: 1.5%;
+    background-color: #fff;
+}*/
+
+.submenu .navbar_item::after {
+    content: '';
+    position: absolute;
+    height: 1px;
+    width: 15%;
+    left: 0%;
+    background-color: #fff;
+    top: 50%;
+}
+
+.submenu .navbar_item p {
+}
+
+.active{
+    background-color: rgb(68, 68, 218);
+}

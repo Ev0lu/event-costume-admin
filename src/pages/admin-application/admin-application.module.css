@@ -1,0 +1,172 @@
+.login{
+    height: 100%;
+    width: 100%;
+}
+
+.login_wrapper{
+    height: 100%;
+    display: flex;
+    width: 100%;
+
+}
+
+.main_select{
+    width: 20%;
+
+}
+
+.main_content{
+    padding: 20px;
+    width: 100%;
+    overflow-y: auto;
+
+}
+
+.manufacturer_list{
+    padding: 10px;
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.manufacturer_item{
+    background-color: #ece8e8;
+    border-radius: 5px;
+
+}
+
+.manufacturer_item h2{
+    width: 220px;
+}
+
+.manufacturer_item{
+    padding: 35px;
+    gap: 35px;
+    display: flex;
+    flex-direction: column;
+}
+
+.manufacturers_item h2{
+    width: 220px;
+}
+
+.manufacturers_item{
+    padding: 15px;
+    background-color: #d8d8d8;
+    border-bottom: 5px solid rgb(245, 244, 244);
+    display: flex;
+    gap: 100px;
+    margin-top: 20px;
+}
+
+.image{
+    width: 40px;
+    height: 100px;
+}
+
+.carouselWrapper {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.slide {
+    outline: none; /* Убрать фокус при клике */
+}
+
+.image {
+    width: 100px; /* Set width to 100px */
+    height: 100px; /* Set height to 100px */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.5s ease;
+    margin: 0px 5px;
+}
+
+.carouselWrapper {
+    width: 50%; /* Ensure the carousel wrapper takes the full width */
+    margin: 0 auto;
+}
+
+.slick-prev, .slick-next {
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.slick-prev:hover, .slick-next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.slick-dots li button:before {
+    color: #000;
+}
+
+.slick-dots li.slick-active button:before {
+    color: #ff4500;
+}
+
+.slick-prev, .slick-next {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%; /* Выравнивание по вертикали */
+    transform: translateY(-50%); /* Центрирование по вертикали */
+    z-index: 2;
+}
+
+.slick-prev {
+    left: -25px; /* Стрелка смещена влево за пределы карусели */
+}
+
+.slick-next {
+    right: -25px; /* Стрелка смещена вправо за пределы карусели */
+}
+
+.slick-prev:hover, .slick-next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.manufacturer_title{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.manufacturer_description{
+    background-color: #e7e4e4;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+
+.buttons_wrapper{
+    display: flex;
+    gap: 40px;
+}
+
+.buttons_wrapper button{
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #dedcdc;
+}
+
+.buttons_wrapper button:hover{
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #e3e0e0;
+}
+

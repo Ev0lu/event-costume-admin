@@ -1,0 +1,129 @@
+.login{
+    height: 100%;
+    width: 100%;
+}
+
+.login_wrapper{
+    height: 100%;
+    display: flex;
+    width: 100%;
+
+}
+
+.main_select{
+    width: 20%;
+}
+
+.main_content{
+    padding: 20px;
+    width: 100%;
+    overflow-y: auto;
+
+}
+
+.event_list{
+    padding: 10px;
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.event_item h2{
+    width: 220px;
+}
+
+.event_item{
+    padding: 15px;
+    display: flex;
+    gap: 100px;
+    align-items: center;
+    background-color: #ece8e8;
+}
+
+.manufacturers_item h2{
+    width: 220px;
+}
+
+.events_item{
+    padding: 15px;
+    background-color: #d8d8d8;
+    border-bottom: 5px solid rgb(245, 244, 244);
+    display: flex;
+    gap: 100px;
+    margin-top: 20px;
+}
+
+
+
+
+.formModal{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 50%;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 15px;
+}
+
+.title_popup{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+
+    gap: 40px;
+    margin-bottom: 20px;
+}
+
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: black;
+}
+
+.input_form{
+    display: flex;
+
+}
+.input_form label{
+    display: flex;
+    width: 150px;
+    
+}
+
+.input_form input{
+    border: 1px solid #A64AC9;
+    font-size: 13px;
+    font-weight: 400;
+    color: #212121;
+    padding: 10px;
+    width: 100%;
+    border-radius: 30px;
+}
+
+.input_form label{
+    font-size: 13px;
+}
+
+.input_wrapper{
+    display: flex;
+    width: 100%;
+    gap: 20%;
+}
+
+.input_form{
+    display: flex;
+    align-items: center;
+    
+}

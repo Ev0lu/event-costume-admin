@@ -1,0 +1,195 @@
+.login{
+    margin: 0 auto;
+    height: 100%;
+}
+
+.login_wrapper{
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.main_content{
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 30px;
+
+}
+
+.logotype{
+    user-select: none;
+    pointer-events: none;
+}
+
+.registrationForm_wrapper{
+    display: flex;
+    
+}
+
+.registrationForm_fields{
+    margin-top: 4%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5%;
+}
+
+.registrationForm_header h1{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 900;
+    font-size: 36px;
+    line-height: 24px;
+    color: rgb(228, 225, 225);
+    margin-bottom: 40px;
+}
+
+.registrationForm_field__input{
+    padding: 16px;
+    width: 300px;
+    border-radius: 5px;
+    background-color: #d8d1d1;
+    color: #7d7b7b;
+    font-size: 16px;
+    position: relative;
+    border: 1px solid #F6F6F6;
+    
+    outline:none;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+
+}
+
+
+.registrationForm_field{
+    position: relative;
+}
+
+
+.registrationForm_field__input__password{
+    padding: 16px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+    width: 300px;
+    border-radius: 5px;
+    background-color: #d8d1d1;
+    font-size: 16px;
+    color: #7d7b7b;
+    border: 1px solid #F6F6F6;
+    position: relative;
+    outline:none;
+
+}
+
+.registrationForm_field__password{
+    position: relative;
+}
+
+
+
+
+
+
+a {
+    text-decoration: none;
+}
+
+
+
+.error {
+    border: 1px solid #FF0000;
+}
+  
+.error_message {
+    color: #FF0000;
+    font-size: 12px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+}
+
+.loginForm_field{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.registrationForm_field__password{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+
+.loginPage_wrapper{
+width: 100%;
+height: 100%;
+background-color: #181818;
+}
+
+
+.loginPage{
+    height: 100%;
+    width: 100%;
+    display: flex;
+
+}
+
+.loginPage_content{
+    height: 100%;
+    width: 100%;
+}
+
+
+.loginPage_content__wrapper{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.codeForm{
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+
+.codeFormHidden {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s ease-out, opacity 0.5s ease-out;
+}
+
+/* Конечное состояние (видимое) */
+.codeFormVisible {
+    opacity: 1;
+    transition: max-height 0.5s ease-in, opacity 0.5s ease-in;
+}
+
+.registrationForm_button{
+    background-color: #d8d1d1;
+    padding: 15px 40px;
+    border-radius: 15px;
+}
+
+.registrationForm_button:hover{
+    background-color: #e4e0e0;
+    padding: 15px 40px;
+    border-radius: 15px;
+}
