@@ -4,13 +4,14 @@ import s from './admin-login.module.css'
 import { useNavigate } from 'react-router-dom';
 import { Authorize } from '../../shared/api';
 import { setToken } from '../../App';
+import { useTranslation } from 'react-i18next';
 
 export const AdminLogin = () => {
     const [login, setLogin] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const navigate = useNavigate()
-
+    const { i18n } = useTranslation();
     useEffect(() => {
         if (password == '') {
             setShowPassword(true)
@@ -61,7 +62,7 @@ export const AdminLogin = () => {
                         <div className={s.registrationForm_button_wrapper}>
                                 <button onClick={() => {
                                     sendLoginForm()
-                        }} className={s.registrationForm_button}>Войти</button>
+                        }} className={s.registrationForm_button}>{i18n.language === 'en' ? 'Login' : 'Войти'}</button>
                         </div> 
                     </div>
                 </div>

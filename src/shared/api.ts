@@ -16,12 +16,6 @@ export async function fetchApiResponse(
     return response
   }
 
-interface LoginData {
-    username: string, 
-    password: string
-}
-
-
 export async function Authorize(data: any) {
     return await fetchApiResponse(`auth/login`, {
         method: 'POST',
@@ -176,8 +170,6 @@ export async function patchManufacturerApplication(data: manufacturerData, ad_pl
 export async function patchManufacturer(data: FormData, ad_placement: string, accessToken: string | null | undefined) {
     return await fetchApiResponse(`admin/manufacturers/${ad_placement}`, {
       headers: {
-        'accept': 'multipart/form-data',
-        'Content-Type': 'multipart/form-data',
         'Authorization': `Bearer ${accessToken}`
       },
       method: 'PATCH',
@@ -188,8 +180,6 @@ export async function patchManufacturer(data: FormData, ad_placement: string, ac
 export async function createManufacturer(data: FormData, accessToken: string | null | undefined) {
     return await fetchApiResponse(`admin/manufacturers/create`, {
       headers: {
-        'accept': 'multipart/form-data',
-        'Content-Type': 'multipart/form-data',
         'Authorization': `Bearer ${accessToken}`
       },
       method: 'POST',
@@ -244,6 +234,84 @@ export async function patchEvent(data: FormData, event_placement: string, access
 
 export async function createEvent(data: FormData, accessToken: string | null | undefined) {
     return await fetchApiResponse(`admin/events/create`, {
+      headers: {
+
+        'Authorization': `Bearer ${accessToken}`
+      },
+      method: 'POST',
+      body: data
+    })
+  }
+
+
+  export async function getCostumes(accessToken: string | undefined | null, language: string, offset?: number) {
+    return await fetchApiResponse(`admin/costumes?language=${language}&offset=${offset}`, {
+      headers: {
+        'accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      },
+    })
+  }
+
+export async function deleteCostume(event_id: string, accessToken: string | undefined | null) {
+    return await fetchApiResponse(`admin/costumes/${event_id}`, {
+      headers: {
+        'accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      },
+      method: 'DELETE'
+    })
+  }
+
+
+export async function patchCostume(data: any, event_placement: string, accessToken: string | null | undefined) {
+    return await fetchApiResponse(`admin/costumes/${event_placement}`, {
+      headers: {
+        'Authorization': `Bearer ${accessToken}`
+      },
+      method: 'PATCH',
+      body: data
+    })
+  }
+
+export async function createCostume(data: any, accessToken: string | null | undefined) {
+    return await fetchApiResponse(`admin/costumes/create`, {
+      headers: {
+
+        'Authorization': `Bearer ${accessToken}`
+      },
+      method: 'POST',
+      body: data
+    })
+  }
+
+
+export async function deleteCategory(event_id: string, accessToken: string | undefined | null) {
+    return await fetchApiResponse(`items/categories/${event_id}`, {
+      headers: {
+        'accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      },
+      method: 'DELETE'
+    })
+  }
+
+
+export async function patchCategory(data: any, event_placement: string, accessToken: string | null | undefined) {
+    return await fetchApiResponse(`items/categories/${event_placement}`, {
+      headers: {
+        'Authorization': `Bearer ${accessToken}`
+      },
+      method: 'PATCH',
+      body: data
+    })
+  }
+
+export async function createCategory(data: any, accessToken: string | null | undefined) {
+    return await fetchApiResponse(`items/categories/create`, {
       headers: {
 
         'Authorization': `Bearer ${accessToken}`

@@ -10,6 +10,7 @@ import { AdminManufactures } from './pages/admin-manufactures/admin-manufactures
 import { AdminApplications } from './pages/admin-application/admin-application';
 import { AdminEvents } from './pages/admin-events/admin-events';
 import { AdminCostumes } from './pages/admin-costumes/admin-costumes';
+import { Categories } from './pages/categories/categories';
 
 export const setToken = (tokenName: string, newToken: string | null) => {
   if (newToken) {
@@ -82,6 +83,11 @@ function App() {
       path: "/costumes",
       loader: sessionLoader,
       element: <AdminCostumes />
+    },
+    {
+      path: "/categories",
+      loader: sessionLoader,
+      element: <Categories />
     },
   ], { basename: '/' })
 

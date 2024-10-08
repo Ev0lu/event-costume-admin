@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import AdminNavbar from '../../shared/navbar/navbar';
 import s from './admin-manufactures.module.css';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { deleteManufacturerApplication, getCategories, getManufacturers, getManufacturerById, createManufacturer, patchManufacturer } from '../../shared/api';
 import { useTranslation } from 'react-i18next';
 import { getToken } from '../../App';
@@ -10,10 +10,10 @@ export const AdminManufactures = () => {
     const { manufacturerId } = useParams(); // Получаем ID производителя из параметров
     const [categories, setCategories] = useState<Category[]>([]);
     const [manufacturers, setManufacturers] = useState<any[]>([]);
-    const { t, i18n } = useTranslation();
+    const { i18n } = useTranslation();
     const [category, setCategory] = useState<Category | null>(null);
-    const [offset, setOffset] = useState(0);
-    const [manufacturerData, setManufacturerData] = useState<any>({
+    const [offset, ] = useState(0);
+    const [_, setManufacturerData] = useState<any>({
         name_ru: '',
         name_en: '',
         description_ru: '',
@@ -28,8 +28,6 @@ export const AdminManufactures = () => {
         status: '',
         manufacturer_icon: null,
     });
-
-    const navigate = useNavigate();
 
     useEffect(() => {
         getAllCategories();
@@ -70,14 +68,6 @@ export const AdminManufactures = () => {
         setManufacturers(data.manufacturers);
     };
 
-    const handleSelectChange = (selectedOption: Category | null) => {
-        if (selectedOption) {
-            setCategory(selectedOption);
-            localStorage.setItem('nameManufactory', selectedOption.label);
-            getAllManufacturers(selectedOption.value);
-        }
-    };
-
     useEffect(() => {
         if (category) {
             getAllManufacturers(category.value);
@@ -91,41 +81,6 @@ export const AdminManufactures = () => {
             getAllManufacturers(category.value);
         }
     };
-
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, name: string) => {
-        const { value } = e.target;
-        setManufacturerData({ ...manufacturerData, [name]: value });
-    };
-
-    const handleArrayChange = (e: React.ChangeEvent<HTMLInputElement>, name: string, index: number) => {
-        const { value } = e.target;
-        const updatedArray = [...manufacturerData[name]];
-        updatedArray[index] = value;
-        setManufacturerData({ ...manufacturerData, [name]: updatedArray });
-    };
-
-    const addToArray = (name: string) => {
-        setManufacturerData({ ...manufacturerData, [name]: [...manufacturerData[name], ''] });
-    };
-
-    const removeFromArray = (name: string, index: number) => {
-        const updatedArray = manufacturerData[name].filter((_: any, i: number) => i !== index);
-        setManufacturerData({ ...manufacturerData, [name]: updatedArray });
-    };
-
-    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>, name: string) => {
-        const file = e.target.files?.[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setManufacturerData({ ...manufacturerData, [name]: reader.result });
-            };
-            reader.readAsDataURL(file);
-        }
-    };
-
-  
-
 
     const [formData, setFormData] = useState<{
         manufacturerIcon: FileList | null;

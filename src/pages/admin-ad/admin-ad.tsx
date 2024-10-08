@@ -1,23 +1,20 @@
 import { useEffect, useState } from 'react';
 import AdminNavbar from '../../shared/navbar/navbar';
 import s from './admin-ad.module.css';
-import { useNavigate } from 'react-router-dom';
 import { getAds, getAdById, patchAd, deleteAd, createAd } from '../../shared/api'; // Предполагается, что эти API методы уже реализованы
 import { useTranslation } from 'react-i18next';
 import Select from 'react-select';
 import { getToken } from '../../App';
 
 export const AdminAd = () => {
-    const { t, i18n } = useTranslation();
+    const { i18n } = useTranslation();
     const [ads, setAds] = useState<any[]>([]);
     const [offset, setOffset] = useState(0);
-    const [limit, setLimit] = useState(25); // Лимит по умолчанию
+    const [limit, ] = useState(25); // Лимит по умолчанию
     const [adPlacement, setAdPlacement] = useState<string>('Main page'); // Default placement
-    const [selectedAd, setSelectedAd] = useState<any | null>(null); // Выбранное объявление
     const [adDetails, setAdDetails] = useState<any | null>({ad_id: '' ,ad_placement: 'Main page', manufacturer_id: '', start_date: '', end_date: '' }); // Инициализируем пустую форму для создания нового объявления
     const [isLoading, setIsLoading] = useState(false);
     const [advert, setAdvert] = useState<any>();
-    const navigate = useNavigate();
 
     const adPlacementOptions = [
         { label: 'Main page', value: 'Main page' },
@@ -36,7 +33,7 @@ export const AdminAd = () => {
         const response = await getAds(adPlacement, offset, token);
         const data = await response.json();
         if (offset === 0) {
-            setAds((prevAds) => [...data.ads]);
+            setAds(() => [...data.ads]);
         } else {
             setAds((prevAds) => [...prevAds, ...data.ads]); // Подгрузка новых объявлений
         }
@@ -125,11 +122,11 @@ export const AdminAd = () => {
                     {/* Список объявлений */}
                     <div className={s.ad_list}>
                     <div className={s.manufacturers_item}>
-                                        <p>Страница</p>
-                                        <p style={{paddingRight: '10.5%'}}>Айди мануфактуры</p>
-                                        <p style={{marginRight: '-0.6%'}}>Дата начала</p>
-                                        <p style={{marginRight: '-3%'}}>Дата завершения</p>
-                                        <p>Айди рекламы</p>
+                                        <p>{i18n.language === 'en' ? 'Page' : 'Страница'}</p>
+                                        <p style={{paddingRight: '10.5%'}}>{i18n.language === 'en' ? 'Manufacture ID' : 'Айди производителя'}</p>
+                                        <p style={{marginRight: '-0.6%'}}>{i18n.language === 'en' ? 'Start date' : 'Дата начала'}</p>
+                                        <p style={{marginRight: '-3%'}}>{i18n.language === 'en' ? 'End date' : 'Дата завершения'}</p>
+                                        <p>{i18n.language === 'en' ? 'Ad ID' : 'Айди рекламы'}</p>
 
                         </div>
                         {ads.length > 0 ? (
@@ -151,13 +148,13 @@ export const AdminAd = () => {
                                     </div>
 
                                     <div  className={`${s.grid_container_about_more} ${ad.ad_id === selectedItemId ? s.active : s.unactive}`}>
-                                    <p>Название мануфактуры:</p>
+                                    <p>{i18n.language === 'en' ? 'Manufacture name' : 'Название производителя'}:</p>
                                     <p>
                                         {advert?.manufacturer 
                                             ? (i18n.language === 'en' ? advert.manufacturer.name_en : advert.manufacturer.name_ru) 
                                             : i18n.language === 'en' ? 'Manufacturer name not available' : 'Имя производителя недоступно'}
                                     </p>
-                                    <p>Статус мануфактуры:</p>
+                                    <p>{i18n.language === 'en' ? 'Manufacture status' : 'Статус производителя'}:</p>
                                     <p>
                                         {advert?.manufacturer 
                                             ? advert.manufacturer.status 
@@ -189,7 +186,7 @@ export const AdminAd = () => {
                                 handleSaveAd(adDetails);
                             }}>
                                 {/* Поля формы */}
-                                <h2 style={{fontSize: '14px'}}>Создание/изменение рекламы</h2>
+                                <h2 style={{fontSize: '14px'}}>{i18n.language === 'en' ? 'Create/patch ad' : 'Создать/изменить рекламу'}</h2>
                                 <input
                                     type="text"
                                     value={adDetails.ad_id}

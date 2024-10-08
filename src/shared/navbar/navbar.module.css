@@ -44,9 +44,6 @@
     max-height: 250px; /* Укажите максимальную высоту, которая вмещает все элементы */
 }
 
-.submenu .navbar_item {
-}
-
 
 /*.submenu::before{
     content: '';
@@ -68,9 +65,18 @@
     top: 50%;
 }
 
-.submenu .navbar_item p {
-}
-
 .active{
     background-color: rgb(68, 68, 218);
+}
+
+.header_language{
+    display: flex;
+    color: white;
+    gap: 10px;
+    width: 100%;
+    justify-content: center;
+    margin-top: 20px;
+}
+.header_language p{
+    color: white;
 }

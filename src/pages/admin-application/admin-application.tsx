@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import AdminNavbar from '../../shared/navbar/navbar';
 import s from './admin-application.module.css'
-import { useNavigate } from 'react-router-dom';
 import { deleteManufacturerApplication, getCategories, getManufacturerById, getManufacturers, patchManufacturerApplication } from '../../shared/api';
 import { useTranslation } from 'react-i18next';
 import Select from 'react-select';
@@ -9,46 +8,6 @@ import { getToken } from '../../App';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
-const NextArrow = (props: any) => {
-    const { className, style, onClick } = props;
-    return (
-        <div
-            className={className}
-            style={{ 
-                ...style, 
-                display: 'block', 
-                right: '-25px',  /* Позиция справа за пределами карусели */
-                top: '50%',      /* Выравнивание по вертикали */
-                transform: 'translateY(-50%)', 
-                zIndex: 2,       /* Поверх других элементов */
-            }}
-            onClick={onClick}
-        >
-            <span style={{ fontSize: '24px', color: 'black' }}>→</span>
-        </div>
-    );
-};
-
-const PrevArrow = (props: any) => {
-    const { className, style, onClick } = props;
-    return (
-        <div
-            className={className}
-            style={{ 
-                ...style, 
-                display: 'block', 
-                left: '-25px',   /* Позиция слева за пределами карусели */
-                top: '50%',      /* Выравнивание по вертикали */
-                transform: 'translateY(-50%)', 
-                zIndex: 2,       /* Поверх других элементов */
-            }}
-            onClick={onClick}
-        >
-            <span style={{ fontSize: '24px', color: 'black' }}>←</span>
-        </div>
-    );
-};
 
 export const AdminApplications = () => {
     
@@ -65,11 +24,10 @@ export const AdminApplications = () => {
     };
     const [categories, setCategories] = useState<Category[]>([]);
     const [manufacturers, setManufacturers] = useState<any[]>([]);
-    const { t, i18n } = useTranslation();
+    const { i18n } = useTranslation();
     const [category, setCategory] = useState<Category | null>(null); // Выбранная категория
-    const [offset, setOffset] = useState(0);
+    const [offset, ] = useState(0);
 
-    const navigate = useNavigate();
     useEffect(() => {
         getAllCategories()
         if (i18n.language === 'ru-RU' || i18n.language === 'ru-EN') {
@@ -153,7 +111,7 @@ export const AdminApplications = () => {
         const data = {
             status: 'accepted'
         }
-        const response = await patchManufacturerApplication(data, id, token);
+        await patchManufacturerApplication(data, id, token);
         if (category) {
             await getAllManufacturers(category.value)
         }

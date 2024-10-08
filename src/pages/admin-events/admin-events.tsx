@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import AdminNavbar from '../../shared/navbar/navbar';
 import s from './admin-events.module.css';
-import { useNavigate, useParams } from 'react-router-dom';
 import { deleteEvent, getEvents, getEventById, createEvent, patchEvent } from '../../shared/api';
 import { useTranslation } from 'react-i18next';
 import { getToken } from '../../App';
@@ -9,8 +8,8 @@ import { getToken } from '../../App';
 export const AdminEvents = () => {
     const [eventId, setEventId] = useState(''); 
     const [events, setEvents] = useState<any[]>([]);
-    const { t, i18n } = useTranslation();
-    const [offset, setOffset] = useState(0);
+    const { i18n } = useTranslation();
+    const [offset, ] = useState(0);
     const [eventData, setEventData] = useState<any>({
         title_ru: '',
         title_en: '',
@@ -24,7 +23,6 @@ export const AdminEvents = () => {
         video_link: ''
     });
 
-    const navigate = useNavigate();
 
     useEffect(() => {
         getAllEvents();
@@ -126,52 +124,55 @@ export const AdminEvents = () => {
             <div className={s.login_wrapper}>
                 <AdminNavbar />
                 <div className={s.main_content}>
-                    <form className={s.formModal} onSubmit={handleSubmit}>
-                        <div className={s.title_popup}>
-                            <p>{eventId ? t('Edit Event') : t('Create Event')}</p>
-                        </div>
-                        <div className={s.input_form}>
-                            <label>Event ID</label>
-                            <input type="text"  value={eventId} onChange={(e) => setEventId(e.target.value)} />
-                        </div>
-                        <div className={s.input_form}>
-                            <label>{t('Title (RU)')}</label>
-                            <input type="text" name="title_ru" value={eventData.title_ru} onChange={(e) => handleInputChange(e, 'title_ru')} required={eventId === ''} />
-                        </div>
-                        <div className={s.input_form}>
-                            <label>{t('Title (EN)')}</label>
-                            <input type="text" name="title_en" value={eventData.title_en} onChange={(e) => handleInputChange(e, 'title_en')} required={eventId === ''} />
-                        </div>
-                        <div className={s.input_form}>
-                            <label>{t('Description (RU)')}</label>
-                            <input name="description_ru" value={eventData.description_ru} onChange={(e) => handleInputChange(e, 'description_ru')} />
-                        </div>
-                        <div className={s.input_form}>
-                            <label>{t('Description (EN)')}</label>
-                            <input name="description_en" value={eventData.description_en} onChange={(e) => handleInputChange(e, 'description_en')} />
-                        </div>
-                        <div className={s.input_form}>
-                            <label>{t('Event Date')}</label>
-                            <input type="date" name="event_date" value={eventData.event_date} onChange={(e) => handleInputChange(e, 'event_date')} required={eventId === ''} />
-                        </div>
-                        <div className={s.input_form}>
-                            <label>{t('Contact Info (RU)')}</label>
-                            <input name="contact_info_ru" value={eventData.contact_info_ru} onChange={(e) => handleInputChange(e, 'contact_info_ru')} />
-                        </div>
-                        <div className={s.input_form}>
-                            <label>{t('Contact Info (EN)')}</label>
-                            <input name="contact_info_en" value={eventData.contact_info_en} onChange={(e) => handleInputChange(e, 'contact_info_en')} />
-                        </div>
-                        <div className={s.input_form}>
-                            <label>{t('Upload Event Pictures')}</label>
-                            <input type="file" name="pictures" multiple onChange={(e) => handleImageChange(e, 'pictures')} />
-                        </div>
-                        <div className={s.input_form}>
-                            <label>{t('Video Link')}</label>
-                            <input type="text" name="video_link" value={eventData.video_link} onChange={(e) => handleInputChange(e, 'video_link')} />
-                        </div>
-                        <button type="submit">{eventId ? t('Update Event') : t('Create Event')}</button>
-                    </form>
+                <form className={s.formModal} onSubmit={handleSubmit}>
+                    <div className={s.title_popup}>
+                        <p>{eventId ? (i18n.language === 'en' ? 'Update Event' : 'Обновить событие') : (i18n.language === 'en' ? 'Create Event' : 'Создать событие')}</p>
+                    </div>
+                    <div className={s.input_form}>
+                        <label>{i18n.language === 'en' ? 'Event ID' : 'Айди события'}</label>
+                        <input type="text" value={eventId} onChange={(e) => setEventId(e.target.value)} />
+                    </div>
+                    <div className={s.input_form}>
+                        <label>{i18n.language === 'en' ? 'Title (RU)' : 'Название (RU)'}</label>
+                        <input type="text" name="title_ru" value={eventData.title_ru} onChange={(e) => handleInputChange(e, 'title_ru')} required={eventId === ''} />
+                    </div>
+                    <div className={s.input_form}>
+                        <label>{i18n.language === 'en' ? 'Title (EN)' : 'Название (EN)'}</label>
+                        <input type="text" name="title_en" value={eventData.title_en} onChange={(e) => handleInputChange(e, 'title_en')} required={eventId === ''} />
+                    </div>
+                    <div className={s.input_form}>
+                        <label>{i18n.language === 'en' ? 'Description (RU)' : 'Описание (RU)'}</label>
+                        <input name="description_ru" value={eventData.description_ru} onChange={(e) => handleInputChange(e, 'description_ru')} />
+                    </div>
+                    <div className={s.input_form}>
+                        <label>{i18n.language === 'en' ? 'Description (EN)' : 'Описание (EN)'}</label>
+                        <input name="description_en" value={eventData.description_en} onChange={(e) => handleInputChange(e, 'description_en')} />
+                    </div>
+                    <div className={s.input_form}>
+                        <label>{i18n.language === 'en' ? 'Event Date' : 'Дата события'}</label>
+                        <input type="date" name="event_date" value={eventData.event_date} onChange={(e) => handleInputChange(e, 'event_date')} required={eventId === ''} />
+                    </div>
+                    <div className={s.input_form}>
+                        <label>{i18n.language === 'en' ? 'Contact Info (RU)' : 'Контактная информация (RU)'}</label>
+                        <input name="contact_info_ru" value={eventData.contact_info_ru} onChange={(e) => handleInputChange(e, 'contact_info_ru')} />
+                    </div>
+                    <div className={s.input_form}>
+                        <label>{i18n.language === 'en' ? 'Contact Info (EN)' : 'Контактная информация (EN)'}</label>
+                        <input name="contact_info_en" value={eventData.contact_info_en} onChange={(e) => handleInputChange(e, 'contact_info_en')} />
+                    </div>
+                    <div className={s.input_form}>
+                        <label>{i18n.language === 'en' ? 'Upload Event Pictures' : 'Загрузить изображения события'}</label>
+                        <input type="file" name="pictures" multiple onChange={(e) => handleImageChange(e, 'pictures')} />
+                    </div>
+                    <div className={s.input_form}>
+                        <label>{i18n.language === 'en' ? 'Video Link' : 'Ссылка на видео'}</label>
+                        <input type="text" name="video_link" value={eventData.video_link} onChange={(e) => handleInputChange(e, 'video_link')} />
+                    </div>
+                    <button type="submit">
+                        {eventId ? (i18n.language === 'en' ? 'Update Event' : 'Обновить событие') : (i18n.language === 'en' ? 'Create Event' : 'Создать событие')}
+                    </button>
+                </form>
+
 
                     <div className={s.events_list}>
                         <div style={{ marginBottom: '-20px' }} className={s.events_item}>
