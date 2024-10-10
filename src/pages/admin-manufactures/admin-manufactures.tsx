@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { deleteManufacturerApplication, getCategories, getManufacturers, getManufacturerById, createManufacturer, patchManufacturer } from '../../shared/api';
 import { useTranslation } from 'react-i18next';
 import { getToken } from '../../App';
+import Select from 'react-select';
 
 export const AdminManufactures = () => {
     const { manufacturerId } = useParams(); // Получаем ID производителя из параметров
@@ -122,6 +123,20 @@ export const AdminManufactures = () => {
             setFormData((prev) => ({ ...prev, [name]: value }));
         }
     };
+
+    const handleSelectChange = (selectedOption: any) => {
+        if (selectedOption) {
+            const categoryId = selectedOption.value;
+
+            getAllManufacturers(categoryId)
+
+        }
+    };
+
+    interface Category {
+        label: string;
+        value: string;
+      }
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -253,6 +268,26 @@ export const AdminManufactures = () => {
                 </form>
 
 
+                <Select
+                                options={categories} // Опции для селекта
+                                onChange={handleSelectChange} // Обработчик выбора
+                                placeholder={i18n.language === 'en' ? 'Select category...' : 'Выбрать...'}
+                                styles={{
+                                    control: (provided) => ({
+                                      ...provided,
+                                      fontFamily: "Manrope, sans-serif"
+                                    }),
+                                    menu: (provided) => ({
+                                      ...provided,
+                                      fontFamily: "Manrope, sans-serif"
+                                    }),
+                                    option: (provided) => ({
+                                      ...provided,
+                                      fontFamily: "Manrope, sans-serif"
+                                    }),
+                                  }}
+                            />
+
                     <div className={s.manufacturers_list}>
                         <div style={{ marginBottom: '-20px' }} className={s.manufacturers_item}>
                             <h2 style={{ marginRight: '17.4%' }}>{i18n.language === 'en' ? 'Manufacture name' : 'Название производства'}</h2>
@@ -282,7 +317,3 @@ export const AdminManufactures = () => {
     );
 };
 
-interface Category {
-    label: string;
-    value: string;
-}

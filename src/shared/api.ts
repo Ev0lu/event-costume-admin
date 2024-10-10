@@ -75,35 +75,25 @@ export async function deleteAd(ad_placement: string, accessToken: string | null 
     })
   }
 
-interface AdData {
-    ad_placement: string, 
-    manufacturer_id: string,
-    start_date: string,
-    end_date: string
-}
 
-
-export async function patchAd(data: AdData, ad_placement: string, accessToken: string | null | undefined) {
+export async function patchAd(data: FormData, ad_placement: string, accessToken: string | null | undefined) {
     return await fetchApiResponse(`admin/ads/${ad_placement}`, {
       headers: {
-        'accept': 'application/json',
-        'Content-Type': 'application/json',
+
         'Authorization': `Bearer ${accessToken}`
       },
       method: 'PATCH',
-      body: JSON.stringify(data)
+      body: data
     })
   }
 
-export async function createAd(data: AdData, accessToken: string | null | undefined) {
+export async function createAd(data: FormData, accessToken: string | null | undefined) {
     return await fetchApiResponse(`admin/ads/create`, {
       headers: {
-        'accept': 'application/json',
-        'Content-Type': 'application/json',
         'Authorization': `Bearer ${accessToken}`
       },
       method: 'POST',
-      body: JSON.stringify(data)
+      body: data
     })
   }
 

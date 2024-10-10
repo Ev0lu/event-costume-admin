@@ -11,109 +11,93 @@ import "slick-carousel/slick/slick-theme.css";
 
 export const AdminApplications = () => {
     
-    
     const settings = {
-        dots: true, // Показать индикаторы
-        infinite: true, // Бесконечная прокрутка
-        speed: 500, // Скорость анимации
-        slidesToShow: 3, // Показывать по 3 изображения
-        slidesToScroll: 1, // Прокручивать по одному
-        centerMode: true, // Центрирование текущего слайда
-        variableWidth: true, // Адаптация ширины изображений
-
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        centerMode: true,
+        variableWidth: true,
     };
+    
     const [categories, setCategories] = useState<Category[]>([]);
     const [manufacturers, setManufacturers] = useState<any[]>([]);
     const { i18n } = useTranslation();
-    const [category, setCategory] = useState<Category | null>(null); // Выбранная категория
-    const [offset, ] = useState(0);
+    const [category, setCategory] = useState<Category | null>(null);
+    const [offset] = useState(0);
 
     useEffect(() => {
-        getAllCategories()
+        const fetchCategories = async () => {
+            const response = await getCategories(i18n.language === 'en' ? 'en' : 'ru');
+            const data = await response.json();
+            const formattedCategories = data.categories.map((category: any) => ({
+                label: i18n.language === 'en' ? category.name_en : category.name_ru,
+                value: category.category_id,
+            }));
+            setCategories(formattedCategories);
+            // Set the first category after fetching categories
+            if (formattedCategories.length > 0) {
+                setCategory(formattedCategories[0]); // Set the first category here
+                localStorage.setItem('nameManufactory', formattedCategories[0].label);
+                getAllManufacturers(formattedCategories[0].value); // Fetch manufacturers for the first category
+            }
+        };
+
+        fetchCategories();
+
         if (i18n.language === 'ru-RU' || i18n.language === 'ru-EN') {
-            i18n.changeLanguage('ru')
+            i18n.changeLanguage('ru');
         }
-    }, [])
-    // Функция для получения всех категорий
-    const getAllCategories = async () => {
+    }, [i18n]);
 
-        const response = await getCategories(i18n.language === 'en' ? 'en' : 'ru');
-        const data = await response.json();
-        const formattedCategories = data.categories.map((category: any) => ({
-            label: i18n.language === 'en' ? category.name_en : category.name_ru,
-            value: category.category_id,
-        }));
-        setCategories(formattedCategories);
 
-        // Устанавливаем первую категорию по умолчанию
-        if (formattedCategories.length > 0) {
-            setCategory(formattedCategories[0]); // Выбираем первую категорию
-        }
-    };
-
-    // Функция для получения всех производителей
+    
     const getAllManufacturers = async (categoryId: string) => {
-        const token = getToken('access')
-        const status = 'pending'
+        const token = getToken('access');
+        const status = 'pending';
         const response = await getManufacturers(token, categoryId, i18n.language, offset, status);
         const data = await response.json();
         const manufacturersWithDetails = await Promise.all(
             data.manufacturers.map(async (manufacturer: any) => {
-                // Выполняем запрос для получения дополнительных данных по каждому производителю
                 const manufacturerResponse = await getManufacturerById(token, manufacturer.manufacturer_id, i18n.language === 'en' ? 'en' : 'ru');
                 const manufacturerData = await manufacturerResponse.json();
-                
-                // Возвращаем обновлённые данные по производителю
                 return {
-                    ...manufacturer, // Данные производителя из начального списка
-                    ...manufacturerData // Данные производителя из детального запроса
+                    ...manufacturer,
+                    ...manufacturerData
                 };
             })
         );
-    
-        // Обновляем состояние с новыми производителями
+
         setManufacturers(manufacturersWithDetails);
-        console.log(manufacturersWithDetails);
     };
 
-    // Обработчик изменения выбора категории
     const handleSelectChange = (selectedOption: Category | null) => {
         if (selectedOption) {
-            setCategory(selectedOption); // Устанавливаем выбранную категорию
+            setCategory(selectedOption);
             localStorage.setItem('nameManufactory', selectedOption.label);
-            getAllManufacturers(selectedOption.value);
+            getAllManufacturers(selectedOption.value); // Fetch manufacturers for the selected category
         }
     };
-
-    useEffect(() => {
-        getAllCategories();
-    }, []);
-
-    useEffect(() => {
-        // При изменении категории загружаем производителей для выбранной категории
-        if (category) {
-            getAllManufacturers(category.value);
-        }
-    }, [category]);
 
 
 
     const deleteManufacturer = async (id: string) => {
-        const token = getToken('access')
+        const token = getToken('access');
         await deleteManufacturerApplication(id, token);
         if (category) {
-            await getAllManufacturers(category.value)
+            await getAllManufacturers(category.value);
         }
     };
 
     const patchManufacturer = async (id: string) => {
-        const token = getToken('access')
+        const token = getToken('access');
         const data = {
             status: 'accepted'
-        }
+        };
         await patchManufacturerApplication(data, id, token);
         if (category) {
-            await getAllManufacturers(category.value)
+            await getAllManufacturers(category.value);
         }
     };
 

@@ -3,6 +3,8 @@ import s from './navbar.module.css'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next';
 
+
+
 export const AdminNavbar = () => {
     const navigate = useNavigate()
     const location = useLocation();
@@ -19,6 +21,10 @@ export const AdminNavbar = () => {
         }
         setSubmenuVisible(localStorage.getItem('isVisible') === 'false')
     }, [])
+
+
+
+
     return (
         <div className={s.admin_navbar}>
                 <div className={s.admin_navbar_wrapper}>
@@ -45,6 +51,10 @@ export const AdminNavbar = () => {
                         <div onClick={() => navigate('/costumes')} className={`${s.navbar_item} ${isActive('/costumes') ? s.active : ''}`}>
                             <p>{i18n.language === 'en' ? 'Costumes' : 'Костюмы'}</p>
                         </div>
+   
+                    </div>
+                )}
+
                         <div className={s.header_language}>
                             <p style={{fontWeight: i18n.language === 'ru' ? 700 : 400}} onClick={() => {
                                     i18n.changeLanguage('ru');  // Передаем строку 'ru'
@@ -57,8 +67,6 @@ export const AdminNavbar = () => {
                                     window.location.reload()
                                 }}>EN</p>
                          </div>
-                    </div>
-                )}
 
             </div>
         </div>

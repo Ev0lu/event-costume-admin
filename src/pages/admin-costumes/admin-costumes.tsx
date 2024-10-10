@@ -76,40 +76,7 @@ export const AdminCostumes = () => {
             <div className={s.login_wrapper}>
                 <AdminNavbar />
                 <div className={s.main_content}>
-                    <div className={s.costume_list}>
-                        <div className={s.costume_item}>
-                            <p>{i18n.language === 'en' ? 'Name' : 'Имя'}</p>
-                            <p>{i18n.language === 'en' ? 'Categories' : 'Категории'}</p>
-                            <p>{i18n.language === 'en' ? 'Costume id' : 'Айди костюма'}</p>
-                        </div>
-                        {costumes.length > 0 ? (
-                            <div className={s.list}>
-                                {costumes.map((costume) => (
-                                    <div className={s.item_wrapper} key={costume.costume_id}>
-                                        <div className={s.costume_item}>
-                                            <p>{costume.title_ru}</p>
-                                            <p>{costume.title_en}</p>
-                                            <p>{(costume.category_ids || []).join(', ')}</p> {/* Защита от null */}
-                                            <p>{costume.costume_id}</p>
-                                            <button onClick={() => handleDeleteCostume(costume.costume_id)}>
-                                                {i18n.language === 'en' ? 'Delete' : 'Удалить'}
-                                            </button>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        ) : (
-                            <p style={{ fontSize: '12px', margin: '10px 0px' }}>{i18n.language === 'en' ? 'No costumes found' : 'Костюмы не найдены'}</p>
-                        )}
-                    </div>
-
-                    {/* Кнопка для загрузки ещё */}
-                    <button className={s.loadMoreBtn} onClick={loadMoreCostumes} disabled={isLoading}>
-                        {i18n.language === 'en' ? 'Load more' : 'Загрузить ещё'}
-                    </button>
-
-                    {/* Подробности костюма (анимация может быть добавлена через CSS) */}
-                    {costumeDetails && (
+                {costumeDetails && (
                         <div className={s.costume_details}>
                             <h3>{costumeDetails.title_ru}</h3>
                             <p>{costumeDetails.title_en}</p>
@@ -152,6 +119,42 @@ export const AdminCostumes = () => {
                             </form>
                         </div>
                     )}
+
+
+                    <div className={s.costume_list}>
+                        <div className={s.costume_item}>
+                            <p>{i18n.language === 'en' ? 'Name' : 'Имя'}</p>
+                            <p>{i18n.language === 'en' ? 'Categories' : 'Категории'}</p>
+                            <p>{i18n.language === 'en' ? 'Costume id' : 'Айди костюма'}</p>
+                        </div>
+                        {costumes.length > 0 ? (
+                            <div className={s.list}>
+                                {costumes.map((costume) => (
+                                    <div className={s.item_wrapper} key={costume.costume_id}>
+                                        <div className={s.costume_item}>
+                                            <p>{costume.title_ru}</p>
+                                            <p>{costume.title_en}</p>
+                                            <p>{(costume.category_ids || []).join(', ')}</p> {/* Защита от null */}
+                                            <p>{costume.costume_id}</p>
+                                            <button onClick={() => handleDeleteCostume(costume.costume_id)}>
+                                                {i18n.language === 'en' ? 'Delete' : 'Удалить'}
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        ) : (
+                            <p style={{ fontSize: '12px', margin: '10px 0px' }}>{i18n.language === 'en' ? 'No costumes found' : 'Костюмы не найдены'}</p>
+                        )}
+                    </div>
+
+                    {/* Кнопка для загрузки ещё */}
+                    <button className={s.loadMoreBtn} onClick={loadMoreCostumes} disabled={isLoading}>
+                        {i18n.language === 'en' ? 'Load more' : 'Загрузить ещё'}
+                    </button>
+
+                    {/* Подробности костюма (анимация может быть добавлена через CSS) */}
+                   
                 </div>
             </div>
         </div>

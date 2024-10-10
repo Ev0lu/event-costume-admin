@@ -93,7 +93,7 @@
 }
 
 .costume_details{
-    margin-top: 40px;
+    margin-top: 0px;
     gap: 10px;
     display: flex;
     flex-direction: column;

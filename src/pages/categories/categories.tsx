@@ -76,28 +76,7 @@ export const Categories = () => {
             <div className={s.login_wrapper}>
                 <AdminNavbar />
                 <div className={s.main_content}>
-                    <div className={s.manufacturers_list}>
-                        <div style={{ marginBottom: '-20px' }} className={s.manufacturers_item}>
-                            <h2 style={{ marginRight: '17.4%' }}>{i18n.language === 'en' ? 'Category name' : 'Название категории'}</h2>
-                            <p>{i18n.language === 'en' ? 'Category id' : 'Айди категории'}</p>
-                        </div>
-                        {categories && categories.length > 0 ? (
-                            <div className={s.manufacturer_list}>
-                                {categories && categories.map((manufacturer: any) => (
-                                    <div key={manufacturer.category_id} className={s.manufacturer_item}>
-                                        <h2>
-                                            {i18n.language === 'en' ? manufacturer.name_en : manufacturer.name_ru}
-                                        </h2>
-                                        <p>{manufacturer.category_id}</p>
-                                    </div>
-                                ))}
-                            </div>
-                        ) : (
-                            <p style={{ marginTop: '20px' }}>{i18n.language === 'en' ? 'No category found' : 'Категории не найдены'}</p>
-                        )}
-                    </div>
-
-                    <form
+                <form
                         className={s.category_details}
                         onSubmit={(e) => {
                             e.preventDefault();
@@ -153,6 +132,26 @@ export const Categories = () => {
                             {i18n.language === 'en' ? 'Save' : 'Сохранить'}
                         </button>
                         </form>
+                    <div className={s.manufacturers_list}>
+                        <div style={{ marginBottom: '-20px' }} className={s.manufacturers_item}>
+                            <h2 style={{ marginRight: '17.4%' }}>{i18n.language === 'en' ? 'Category name' : 'Название категории'}</h2>
+                            <p>{i18n.language === 'en' ? 'Category id' : 'Айди категории'}</p>
+                        </div>
+                        {categories && categories.length > 0 ? (
+                            <div className={s.manufacturer_list}>
+                                {categories && categories.map((manufacturer: any) => (
+                                    <div key={manufacturer.category_id} className={s.manufacturer_item}>
+                                        <h2>
+                                            {i18n.language === 'en' ? manufacturer.name_en : manufacturer.name_ru}
+                                        </h2>
+                                        <p>{manufacturer.category_id}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        ) : (
+                            <p style={{ marginTop: '20px' }}>{i18n.language === 'en' ? 'No category found' : 'Категории не найдены'}</p>
+                        )}
+                    </div>
 
                 </div>
             </div>
