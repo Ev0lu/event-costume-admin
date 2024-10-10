@@ -89,7 +89,7 @@ function App() {
       loader: sessionLoader,
       element: <Categories />
     },
-  ], { basename: '/admin/' })
+  ], { basename: '/' })
 
 
   return (
